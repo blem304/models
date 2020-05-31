@@ -182,7 +182,8 @@ def define_data_download_flags():
                          "If true, only download the dev set")
   absl_flags.DEFINE_bool("test_only", False,
                          "If true, only download the test set")
-
+  absl_flags.DEFINE_bool("train_clean_100_only", False,
+                         "If true, only download the train-clean-100 set")
 
 def main(_):
   if not tf.gfile.Exists(FLAGS.data_dir):
@@ -196,6 +197,8 @@ def main(_):
     download_and_process_datasets(FLAGS.data_dir, ["dev-clean", "dev-other"])
   elif FLAGS.test_only:
     download_and_process_datasets(FLAGS.data_dir, ["test-clean", "test-other"])
+  elif FLAGS.train_clean_100_only:
+    download_and_process_datasets(FLAGS.data_dir, ["train-clean-100"])
   else:
     # By default we download the entire dataset.
     download_and_process_datasets(FLAGS.data_dir, LIBRI_SPEECH_URLS.keys())

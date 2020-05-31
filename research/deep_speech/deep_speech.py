@@ -28,8 +28,8 @@ import data.dataset as dataset
 import decoder
 import deep_speech_model
 from official.utils.flags import core as flags_core
-from official.utils.logs import hooks_helper
-from official.utils.logs import logger
+# from official.utils.logs import hooks_helper
+# from official.utils.logs import logger
 from official.utils.misc import distribution_utils
 from official.utils.misc import model_helpers
 
@@ -277,9 +277,9 @@ def run_deep_speech(_):
   }
 
   dataset_name = "LibriSpeech"
-  benchmark_logger = logger.get_benchmark_logger()
-  benchmark_logger.log_run_info("deep_speech", dataset_name, run_params,
-                                test_id=flags_obj.benchmark_test_id)
+  # benchmark_logger = logger.get_benchmark_logger()
+  # benchmark_logger.log_run_info("deep_speech", dataset_name, run_params,
+  #                               test_id=flags_obj.benchmark_test_id)
 
   train_hooks = hooks_helper.get_train_hooks(
       flags_obj.hooks,
@@ -317,7 +317,7 @@ def run_deep_speech(_):
         eval_speech_dataset.entries, input_fn_eval)
 
     # Log the WER and CER results.
-    benchmark_logger.log_evaluation_result(eval_results)
+    # benchmark_logger.log_evaluation_result(eval_results)
     tf.logging.info(
         "Iteration {}: WER = {:.2f}, CER = {:.2f}".format(
             cycle_index + 1, eval_results[_WER_KEY], eval_results[_CER_KEY]))
@@ -433,9 +433,9 @@ def define_deep_speech_flags():
 
 
 def main(_):
-  with logger.benchmark_context(flags_obj):
-    run_deep_speech(flags_obj)
-
+  # with logger.benchmark_context(flags_obj):
+  #   run_deep_speech(flags_obj)
+  run_deep_speech(flags_obj)
 
 if __name__ == "__main__":
   tf.logging.set_verbosity(tf.logging.INFO)
