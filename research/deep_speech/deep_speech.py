@@ -281,10 +281,10 @@ def run_deep_speech(_):
   # benchmark_logger.log_run_info("deep_speech", dataset_name, run_params,
   #                               test_id=flags_obj.benchmark_test_id)
 
-  train_hooks = hooks_helper.get_train_hooks(
-      flags_obj.hooks,
-      model_dir=flags_obj.model_dir,
-      batch_size=flags_obj.batch_size)
+  # train_hooks = hooks_helper.get_train_hooks(
+  #     flags_obj.hooks,
+  #     model_dir=flags_obj.model_dir,
+  #     batch_size=flags_obj.batch_size)
 
   per_replica_batch_size = per_device_batch_size(flags_obj.batch_size, num_gpus)
 
@@ -307,7 +307,8 @@ def run_deep_speech(_):
         train_speech_dataset.entries, cycle_index, flags_obj.sortagrad,
         flags_obj.batch_size)
 
-    estimator.train(input_fn=input_fn_train, hooks=train_hooks)
+    # estimator.train(input_fn=input_fn_train, hooks=train_hooks)
+    estimator.train(input_fn=input_fn_train)
 
     # Evaluation
     tf.logging.info("Starting to evaluate...")
